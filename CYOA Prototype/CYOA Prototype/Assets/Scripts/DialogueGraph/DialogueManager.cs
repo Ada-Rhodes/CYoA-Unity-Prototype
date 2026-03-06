@@ -12,6 +12,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialoguePanel;
     public TextMeshProUGUI SpeakerNameText;
     public TextMeshProUGUI DialogueText;
+    // public GameObject BackgroundPanel;
+    // public Image BackgroundImage;
+    public List<Image> ActorLocationList;
 
     [Header("Choice Button UI")]
     public Button ChoiceButtonPrefab;
@@ -62,9 +65,23 @@ public class DialogueManager : MonoBehaviour
 
         _currentNode = _nodeLookup[nodeID];
 
+        // BackgroundPanel.SetActive(true);
+        // BackgroundImage.GetComponent(_currentNode.BackgroundImage);
         DialoguePanel.SetActive(true);
         SpeakerNameText.SetText(_currentNode.SpeakerName);
         DialogueText.SetText(_currentNode.DialogueText);
+
+        //Speaker Portrait
+        foreach (var location in ActorLocationList)
+            location.enabled = true;
+
+        if (_currentNode.ActorSprite != null)
+        {
+            var img =ActorLocationList[_currentNode.LocationIndex];
+            img.enabled = true;
+            img.sprite = _currentNode.ActorSprite;
+        }
+        
 
         foreach (Transform child in ChoiceButtonContainer)
         {

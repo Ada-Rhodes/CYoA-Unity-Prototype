@@ -26,12 +26,22 @@ public class EndNode : Node
 [Serializable]
 public class DialogueNode : Node
 {
+    public enum Location
+        {
+            Left = 0,
+            Right = 1,
+            LeftBottom = 2,
+            RightBottom = 3
+        }
+    
     protected override void OnDefinePorts(IPortDefinitionContext context)
     {
         context.AddInputPort("in").Build();
         context.AddOutputPort("out").Build();
 
         context.AddInputPort<string>("Speaker").Build();
+        context.AddInputPort<Sprite>("Speaker Sprite").Build();
+        context.AddInputPort<Location>("Sprite Location").Build();
         context.AddInputPort<string>("Dialogue").Build();
     }
 }
@@ -59,5 +69,17 @@ public class ChoiceNode : Node
     protected override void OnDefineOptions(IOptionDefinitionContext context)
     {
         context.AddOption<int>(optionID);
+    }
+}
+
+[Serializable]
+public class BackgroundNode : Node
+{
+    protected override void OnDefinePorts(IPortDefinitionContext context)
+    {
+        context.AddInputPort("in").Build();
+        context.AddOutputPort("out").Build();
+
+        context.AddInputPort<Sprite>("Background Image").Build();
     }
 }

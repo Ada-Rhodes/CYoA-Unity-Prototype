@@ -42,6 +42,10 @@ public class DialogueGraphImporter : ScriptedImporter
             {
                 ProcessChoiceNode(choiceNode, runtimeNode, nodeIDMap);
             }
+            else if (iNode is BackgroundNode backgroundNode)
+            {
+                ProcessBackgroundNode(backgroundNode, runtimeNode, nodeIDMap);
+            }
 
             runtimeGraph.AllNodes.Add(runtimeNode);
         }
@@ -54,6 +58,8 @@ public class DialogueGraphImporter : ScriptedImporter
     {
         runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName("Speaker"));
         runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName("Dialogue"));
+        runtimeNode.LocationIndex = GetPortValue<int>(node.GetInputPortByName("Sprite Location"));
+        runtimeNode.ActorSprite = GetPortValue<Sprite>(node.GetInputPortByName("Speaker Sprite"));
 
         var nextNodePort = node.GetOutputPortByName("out")?.firstConnectedPort;
         if (nextNodePort != null)
@@ -80,6 +86,15 @@ public class DialogueGraphImporter : ScriptedImporter
 
             runtimeNode.Choices.Add(ChoiceData);
         }
+    }
+
+    private void ProcessBackgroundNode(BackgroundNode node, RuntimeDialogueNode runtimeNode, Dictionary<INode, string> nodeIDMap)
+    {
+        runtimeNode.BackgroundImage = GetPortValue<string>(node.GetInputPortByName("Background Image"));
+
+        var nextNodePort = node.GetOutputPortByName("out")?.firstConnectedPort;
+        if (nextNodePort != null)
+            runtimeNode.NextNodeID = nodeIDMap[nextNodePort.GetNode()];
     }
 
     private T GetPortValue<T>(IPort port)
