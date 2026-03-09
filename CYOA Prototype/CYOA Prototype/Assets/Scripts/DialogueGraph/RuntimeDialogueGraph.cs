@@ -17,7 +17,10 @@ public class RuntimeDialogueNode
     public List<ChoiceData> Choices = new List<ChoiceData>();
     public string NextNodeID;
     public string BackgroundImage;
-    public Sprite ActorSprite;
+    public Sprite ActorSprite0;
+    public Sprite ActorSprite1;
+    public Sprite ActorSprite2;
+    public Sprite ActorSprite3;
     public int LocationIndex;
 }
 

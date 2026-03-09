@@ -40,9 +40,14 @@ public class DialogueNode : Node
         context.AddOutputPort("out").Build();
 
         context.AddInputPort<string>("Speaker").Build();
-        context.AddInputPort<Sprite>("Speaker Sprite").Build();
-        context.AddInputPort<Location>("Sprite Location").Build();
         context.AddInputPort<string>("Dialogue").Build();
+        context.AddInputPort<int>("Active Speaker").Build();
+        context.AddInputPort<Sprite>("Speaker Sprite 0").Build();
+        context.AddInputPort<Sprite>("Speaker Sprite 1").Build();
+        context.AddInputPort<Sprite>("Speaker Sprite 2").Build();
+        context.AddInputPort<Sprite>("Speaker Sprite 3").Build();
+        // context.AddInputPort<Location>("Frame").Build();
+        
     }
 }
 

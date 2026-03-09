@@ -69,19 +69,42 @@ public class DialogueManager : MonoBehaviour
         // BackgroundImage.GetComponent(_currentNode.BackgroundImage);
         DialoguePanel.SetActive(true);
         SpeakerNameText.SetText(_currentNode.SpeakerName);
+        // SpeakerNameText.SetText(_currentNode.LocationIndex.ToString());
         DialogueText.SetText(_currentNode.DialogueText);
 
         //Speaker Portrait
         foreach (var location in ActorLocationList)
-            location.enabled = true;
-
-        if (_currentNode.ActorSprite != null)
+            location.enabled = false;
+        if (_currentNode.ActorSprite0 != null)
         {
-            var img =ActorLocationList[_currentNode.LocationIndex];
+            var img =ActorLocationList[0];
             img.enabled = true;
-            img.sprite = _currentNode.ActorSprite;
+            img.sprite = _currentNode.ActorSprite0;
+            img.rectTransform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
-        
+        if (_currentNode.ActorSprite1 != null)
+        {
+            var img =ActorLocationList[1];
+            img.enabled = true;
+            img.sprite = _currentNode.ActorSprite1;
+            img.rectTransform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+        if (_currentNode.ActorSprite2 != null)
+        {
+            var img =ActorLocationList[2];
+            img.enabled = true;
+            img.sprite = _currentNode.ActorSprite2;
+            img.rectTransform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+        if (_currentNode.ActorSprite3 != null)
+        {
+            var img =ActorLocationList[3];
+            img.enabled = true;
+            img.sprite = _currentNode.ActorSprite3;
+            img.rectTransform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+        ActorLocationList[_currentNode.LocationIndex].rectTransform.localScale = new Vector3(1,1,1);
+
 
         foreach (Transform child in ChoiceButtonContainer)
         {

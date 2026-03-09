@@ -58,8 +58,12 @@ public class DialogueGraphImporter : ScriptedImporter
     {
         runtimeNode.SpeakerName = GetPortValue<string>(node.GetInputPortByName("Speaker"));
         runtimeNode.DialogueText = GetPortValue<string>(node.GetInputPortByName("Dialogue"));
-        runtimeNode.LocationIndex = GetPortValue<int>(node.GetInputPortByName("Sprite Location"));
-        runtimeNode.ActorSprite = GetPortValue<Sprite>(node.GetInputPortByName("Speaker Sprite"));
+        // runtimeNode.LocationIndex = GetPortValue<int>(node.GetInputPortByName("Frame"));
+        runtimeNode.LocationIndex = GetPortValue<int>(node.GetInputPortByName("Active Speaker"));
+        runtimeNode.ActorSprite0 = GetPortValue<Sprite>(node.GetInputPortByName("Speaker Sprite 0"));
+        runtimeNode.ActorSprite1 = GetPortValue<Sprite>(node.GetInputPortByName("Speaker Sprite 1"));
+        runtimeNode.ActorSprite2 = GetPortValue<Sprite>(node.GetInputPortByName("Speaker Sprite 2"));
+        runtimeNode.ActorSprite3 = GetPortValue<Sprite>(node.GetInputPortByName("Speaker Sprite 3"));
 
         var nextNodePort = node.GetOutputPortByName("out")?.firstConnectedPort;
         if (nextNodePort != null)
